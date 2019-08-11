@@ -1,0 +1,66 @@
+# CodeSkulptor runs Python programs in your browser.
+# Click the upper left button to run this simple demo.
+
+# CodeSkulptor runs in Chrome 18+, Firefox 11+, and Safari 6+.
+# Some features may work in other browsers, but do not expect
+# full functionality.  It does NOT run in Internet Explorer.
+
+import simplegui
+x=-80
+y=1276
+x1=-80
+y1=1276
+message = simplegui.load_image("D:/Document/Snake and ladder.jpg")
+radvance=False
+advance=True
+radvance1=False
+advance1=True
+# Handler for mouse click
+def click():
+    global x,y,advance,radvance
+    if radvance:
+        x-=295.3
+        if x<295:
+            advance=True
+            y-=295.2
+            radvance=False            
+    if advance:
+        x+=295.3
+        if x>1478:
+            y-=295.2
+            radvance=True
+            advance=False
+        
+    print x,y
+def click2():
+    global x1,y1,advance1,radvance1
+    if radvance1:
+        x1-=295.3
+        if x1<295:
+            advance1=True
+            y1+=295.2
+            radvance1=False            
+    if advance1:
+        x1+=295.3
+        if x1>1478:
+            y1+=295.2
+            radvance1=True
+            advance1=False
+        
+    print x1,y1
+# Handler to draw on canvas
+def draw(canvas):
+    canvas.draw_image(message,[886,738],[1772,1476],[886,738],[1772,1476])
+    canvas.draw_circle([x,y],40,1,'red','red')
+    canvas.draw_circle([x1,y1],40,1,'blue','blue')
+    
+    
+
+# Create a frame and assign callbacks to event handlers
+frame = simplegui.create_frame("Home", 1772, 1476)
+frame.add_button("Player 1", click)
+frame.add_button("Player 2", click2)
+frame.set_draw_handler(draw)
+
+# Start the frame animation
+frame.start()
